@@ -61,10 +61,10 @@ packages:
     dependency: transitive
     description:
       name: bci_device_sdk
-      sha256: "864e3ace69c1f12bb41f33d6fb91de53600c48af04c47b7c7d1fa2d7b9bafc26"
+      sha256: ba36ec3f20e598659dc3e0ba38d76b71cb5a2545990b48672a88ee029e2232fc
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.6"
+    version: "0.0.9"
   boolean_selector:
     dependency: transitive
     description:
@@ -141,10 +141,10 @@ packages:
     dependency: transitive
     description:
       name: connectivity_plus
-      sha256: "77a180d6938f78ca7d2382d2240eb626c0f6a735d0bfdce227d8ffb80f95c48b"
+      sha256: b502a681ba415272ecc41400bd04fe543ed1a62632137dc84d25a91e7746f55f
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.0.2"
+    version: "5.0.1"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
@@ -476,18 +476,18 @@ packages:
     dependency: "direct main"
     description:
       name: libcmsn
-      sha256: a9a696d8a862e8e4120b0ff5fd275e3b7c355077c8b68d853deb921d11696102
+      sha256: bac4844ca7f6849a4ef5111f0a5d07bf823d3dc30a9d738e01d3ec4d9ba530fc
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.4.0+7"
+    version: "1.4.9"
   liboxyz:
     dependency: "direct main"
     description:
       name: liboxyz
-      sha256: f1bee130ea0dd32504af0fd68bd7fb3726580153d63b62f37206126d2f6ade90
+      sha256: "63ba3a5bf69aad5e76ad8ae26e798f9e17fe6637fc710f6fa1294426c599a599"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.11.2+7"
+    version: "0.11.9"
   lints:
     dependency: transitive
     description:
