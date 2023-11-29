@@ -1,9 +1,56 @@
-// Copyright 2017, Paul DeMarco.
-// All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
+import 'package:bci_device_sdk_example/logger.dart';
+import 'package:bci_device_sdk_example/src/examples/crimson/crimson_device_screen.dart';
+import 'package:bci_device_sdk_example/src/examples/oxyzen/oxyzen_device_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bci_device_sdk/bci_device_sdk.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_utils/flutter_utils.dart';
+import 'package:get/get.dart';
+
+class ScanResultWidget extends StatelessWidget {
+  final ScanResult result;
+  final BuildContext ctx;
+
+  const ScanResultWidget(this.result, this.ctx, {Key? key}) : super(key: key);
+
+  String? getNiceManufacturerData(Map<int, List<int>> data) {
+    if (data.isEmpty) {
+      return null;
+    }
+    var res = <String>[];
+    data.forEach((id, bytes) {
+      res.add(
+          '${id.toRadixString(16).toUpperCase()}: ${getNiceHexArray(bytes)}');
+    });
+    return res.join(', ');
+  }
+
+  String getNiceHexArray(List<int> bytes) {
+    return '[${bytes.map((i) => i.toRadixString(16).padLeft(2, '0')).join(', ')}]'
+        .toUpperCase();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScanResultTile(
+      result: result,
+      onTap: () async {
+        try {
+          await EasyLoading.show(status: '配对中...');
+          await BciDeviceManager.bindBleScanResult(result);
+          await EasyLoading.showSuccess('配对成功!');
+          await Get.off(() =>
+              result.isOxyZen ? OxyZenDeviceScreen() : CrimsonDeviceScreen());
+        } catch (e, st) {
+          loggerApp.i('$e');
+          debugPrintStack(stackTrace: st, maxFrames: 7);
+          await EasyLoading.showError('配对失败');
+          await BleScanner.instance.startScan(); //restart scan
+        }
+      },
+    );
+  }
+}
 
 class ScanResultTile extends StatelessWidget {
   const ScanResultTile({Key? key, required this.result, required this.onTap})
@@ -14,30 +61,23 @@ class ScanResultTile extends StatelessWidget {
 
   Widget _buildTitle(BuildContext context) {
     final name = result.localName;
-    if (name.isNotEmpty) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          IntrinsicHeight(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                name,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          )),
-          Text(
-            result.device.id.id.substring(result.device.id.id.length - 10),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
-      );
-    } else {
-      return Text(result.device.id.toString());
-    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          name.isEmpty ? 'N/A' : name,
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          result.device.deviceId.substring(result.device.deviceId.length - 10),
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall
+              ?.copyWith(fontSize: 13.ratio),
+        ),
+      ],
+    );
   }
 
   Widget _buildAdvRow(BuildContext context, String title, String value) {
@@ -95,10 +135,8 @@ class ScanResultTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (result.manufacturerValues == null) return Spacer();
     final inPairingMode = result.inPairingMode;
     final batteryLevel = result.batteryLevel;
-    // loggerApp.i('inPairingMode=$inPairingMode');
     return ExpansionTile(
       title: _buildTitle(context),
       leading: Text(result.rssi.toString()),
@@ -120,44 +158,6 @@ class ScanResultTile extends StatelessWidget {
                 ? result.advertisementData.serviceUuids.join(', ').toUpperCase()
                 : 'N/A'),
       ],
-    );
-  }
-}
-
-class StatusText extends StatelessWidget {
-  final String title;
-  final String value;
-  final bool highlighted;
-
-  const StatusText(
-      {Key? key,
-      required this.title,
-      required this.value,
-      this.highlighted = false})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            title,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(value,
-              style: TextStyle(
-                  fontSize: 10,
-                  color: highlighted
-                      ? Colors.orange
-                      : Theme.of(context).primaryColor))
-        ],
-      ),
     );
   }
 }

@@ -9,6 +9,7 @@ import connectivity_plus
 import device_info_plus
 import flutter_blue
 import flutter_secure_storage_macos
+import geolocator_apple
 import libcmsn
 import liboxyz
 import package_info
@@ -24,6 +25,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   DeviceInfoPlusMacosPlugin.register(with: registry.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
   FlutterBluePlugin.register(with: registry.registrar(forPlugin: "FlutterBluePlugin"))
   FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))
+  GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
   CrimsonPlugin.register(with: registry.registrar(forPlugin: "CrimsonPlugin"))
   OxyZenPlugin.register(with: registry.registrar(forPlugin: "OxyZenPlugin"))
   FLTPackageInfoPlugin.register(with: registry.registrar(forPlugin: "FLTPackageInfoPlugin"))

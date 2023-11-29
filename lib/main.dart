@@ -15,6 +15,7 @@ import 'src/examples/crimson/crimson_device_screen.dart';
 import 'src/examples/scan/ble_scan_screen.dart';
 import 'src/examples/multi_devices/multi_devices_screen.dart';
 import 'src/examples/oxyzen/oxyzen_device_screen.dart';
+import 'src/examples/widgets/app_bar.dart';
 export 'package:bci_device_sdk/bci_device_sdk.dart';
 export 'package:get/get.dart';
 
@@ -22,7 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   BciDevicePluginRegistry.register(CrimsonPluginRegistry());
   BciDevicePluginRegistry.register(OxyZenPluginRegistry());
-  await AppLogger.init(level: Level.ALL);
+  await AppLogger.init(level: Level.INFO);
   BciDeviceConfig.setAvailableModes({
     BciDeviceDataMode.attention,
     BciDeviceDataMode.meditation,
@@ -34,8 +35,8 @@ void main() async {
     BciDeviceDataMode.imu,
   });
   loggerApp.i('------------------main, init------------------');
-  loggerApp.i('-----cmsn version=${getCrimsonSDKVersion()}-----');
-  loggerApp.i('-----oxyz version=${getOxyzenSDKVersion()}-----');
+  loggerApp.i('-----cmsn version=${CrimsonFFI.sdkVersion}-----');
+  loggerApp.i('-----oxyz version=${OxyZenFFI.sdkVersion}-----');
   await BciDeviceManager.init();
 
   loggerApp.i('------------------main, runApp--------------');
@@ -66,7 +67,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       navigatorObservers: [routeObserver],
-      home: const HomeScreen(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+      ),
+      home: HomeScreen(),
       builder: EasyLoading.init(),
       // routes: routes,
     );
@@ -76,34 +81,8 @@ class MyApp extends StatelessWidget {
 // Register the RouteObserver as a navigation observer.
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final buildInfo = ''.obs;
-
-  @override
-  void initState() {
-    super.initState();
-    loggerApp.i('initState');
-    Future.microtask(() async {
-      final packageInfo = await PackageInfo.fromPlatform();
-      buildInfo.value = 'V${packageInfo.version}+${packageInfo.buildNumber}';
-    });
-  }
-
-  @override
-  void dispose() {
-    loggerApp.i('dispose');
-    BciDeviceManager.dispose();
-    loggerApp.i('dispose done');
-
-    super.dispose();
-  }
+class HomeScreen extends StatelessWidget {
+  final controller = Get.put(HomeScreenController());
 
   void _pushBondHeadbandScreen() {
     final headband = BciDeviceManager.bondDevice;
@@ -118,9 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Obx(() => Text('BCI Device DEMO $buildInfo')),
-        backgroundColor: Colors.lightBlue,
+      appBar: MyAppBar(
+        centerTitle: false,
+        back: false,
+        rxTitle: controller.buildInfo,
       ),
       body: WillPopScope(
         onWillPop: _onWillPop,
@@ -129,21 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Wrap(
             spacing: 15,
             children: <Widget>[
-              if (BciDeviceConfig.supportOxyZen)
-                _button('OxyZen', () async {
-                  loggerApp.i(BciDeviceManager.bondDevice);
+              if (BciDeviceConfig.supportBle)
+                _button('BLE Device', () async {
                   if (BciDeviceManager.bondDevice != null) {
+                    loggerApp.i('bondDevice=${BciDeviceManager.bondDevice}');
                     _pushBondHeadbandScreen();
                   } else {
-                    await Get.to(() => const CrimsonScanScreen());
-                  }
-                }),
-              if (BciDeviceConfig.supportCrimson)
-                _button('Crimson', () async {
-                  if (BciDeviceManager.bondDevice != null) {
-                    _pushBondHeadbandScreen();
-                  } else {
-                    await Get.to(() => const CrimsonScanScreen());
+                    await Get.to(() => BciDeviceScanScreen());
                   }
                 }),
               _button('Multi Devices', () async {
@@ -154,6 +126,25 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+}
+
+class HomeScreenController extends GetxController {
+  static const demoTitle = '脑电设备DEMO';
+  final buildInfo = demoTitle.obs;
+
+  @override
+  void onInit() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    buildInfo.value =
+        '$demoTitle V${packageInfo.version}+${packageInfo.buildNumber}';
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    BciDeviceManager.dispose();
   }
 }
 

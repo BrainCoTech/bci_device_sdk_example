@@ -1,15 +1,17 @@
+import 'package:bci_device_sdk_example/src/examples/widgets/status_text_widget.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bci_device_sdk_example/src/examples/charts/attention_chart.dart';
 import 'package:bci_device_sdk_example/src/examples/charts/eeg_chart.dart';
 import 'package:bci_device_sdk_example/src/examples/charts/imu_chart.dart';
 import 'package:bci_device_sdk_example/src/examples/charts/ppg_chart.dart';
-import 'package:bci_device_sdk_example/src/examples/scan/scan_result_widgets.dart';
-import 'package:bci_device_sdk_example/src/examples/oxyzen/ota/device_ota_screen.dart';
+import 'package:bci_device_sdk_example/src/examples/oxyzen/ota/oxyzen_ota_screen.dart';
 import 'package:bci_device_sdk_example/src/examples/widgets/segment.dart';
 import 'package:liboxyz/liboxyz.dart';
 
 import '../../../main.dart';
+import '../widgets/app_bar.dart';
 import 'oxyzen_device_controller.dart';
 
 class OxyZenDeviceScreen extends StatelessWidget {
@@ -21,32 +23,27 @@ class OxyZenDeviceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Get.theme.colorScheme.inversePrimary,
+          leading: const MyBackButton(),
           title: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Obx(() => Text(
-                  '${BciDeviceProxy.instance.name} V${controller.firmware.value}')),
+                  '${controller.deviceName.value} nRF_PPG:${controller.firmware.value}')),
               const SizedBox(height: 3),
               Text(
                 BciDeviceProxy.instance.id,
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
+                style: TextStyle(fontSize: 14),
               )
             ],
           ),
           actions: [
-            ElevatedButton(
+            TextButton(
                 onPressed: () async {
                   await BciDeviceManager.unbind();
                   Get.back();
                 },
-                child: Text(
-                  '解除配对',
-                  style: Theme.of(context)
-                      .primaryTextTheme
-                      .labelLarge!
-                      .copyWith(color: Colors.white),
-                ))
+                child: Text('解除配对')),
           ]),
       body: OxyzenDataWidget(),
     );
@@ -78,7 +75,7 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                 stream: device.onConnectivityChanged,
                 builder: (context, snapshot) => StatusText(
                   title: 'Connectivity',
-                  value: snapshot.data!.desc,
+                  value: snapshot.data!.name,
                   highlighted: !snapshot.data!.isConnected,
                   // high
                 ),
@@ -88,7 +85,7 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                 stream: device.onContactStateChanged,
                 builder: (context, snapshot) => StatusText(
                   title: 'Contact',
-                  value: snapshot.data!.desc,
+                  value: snapshot.data!.name,
                   highlighted: !snapshot.data!.isContacted,
                 ),
               ),
@@ -98,7 +95,7 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                   stream: BciDeviceProxy.instance.onOrientationChanged,
                   builder: (context, snapshot) => StatusText(
                     title: 'Orientation',
-                    value: snapshot.data!.desc,
+                    value: snapshot.data!.name,
                     highlighted: snapshot.data != BciDeviceOrientation.normal,
                   ),
                 ),
@@ -218,8 +215,8 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                       segments:
                           // 'Focus'
                           BciDeviceManager.isBondOxyZen
-                              ? ['EEG', 'ACC', 'GYRO', 'PPG', '正念'].asMap()
-                              : ['EEG', 'ACC', 'GYRO', '正念'].asMap(),
+                              ? ['EEG', 'ACC', 'GYRO', 'PPG', '指数'].asMap()
+                              : ['EEG', 'ACC', 'GYRO', '指数'].asMap(),
                       selectedIndex: controller.tabIndex),
                   const SizedBox(height: 10),
                   chartWidget(controller.tabIndex.value),
@@ -259,6 +256,14 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                 },
                 child: const Text('Stop EEG'),
               ),
+              const SizedBox(width: 5),
+              if (kDebugMode)
+                ElevatedButton(
+                  onPressed: () async {
+                    await device.rename('OZ-正念冥想-Yo1');
+                  },
+                  child: const Text('Rename'),
+                ),
             ]),
             const SizedBox(height: 5),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -318,64 +323,22 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                 },
                 child: const Text('meditation'),
               ),
-              const SizedBox(width: 5),
-              ElevatedButton(
-                onPressed: () async {
-                  BciDeviceConfig.setAvailableModes({
-                    BciDeviceDataMode.social,
-                  });
-                },
-                child: const Text('social'),
-              ),
             ]),
-            // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            //   ElevatedButton(
-            //     onPressed: () async {
-            //       await device.setSleepIdleSeconds(30);
-            //       //await device.setSleepIdleSeconds(24 * 60 * 60);
-            //       // await device.startPPG(mode: ZenLitePpgMode.hr);
-            //     },
-            //     child: const Text('Start PPG HR'),
-            //   ),
-            //   const SizedBox(width: 5),
-            //   ElevatedButton(
-            //     onPressed: () async {
-            //       await device.startPPG(mode: ZenLitePpgMode.spo2);
-            //     },
-            //     child: const Text('Start PPG SPO2'),
-            //   ),
-            // ]),
+            if (kDebugMode)
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    await device.setSleepIdleSeconds(30 * 60);
+                  },
+                  child: const Text('setSleepIdleSeconds'),
+                ),
+              ]),
             const SizedBox(height: 5),
-            // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            //   ElevatedButton(
-            //     onPressed: () async {
-            //       await Get.to(() => IMUChartScreen(
-            //           chartType: ChartType.gyro,
-            //           valuesX: controller.gyroX,
-            //           valuesY: controller.gyroY,
-            //           valuesZ: controller.gyroZ,
-            //           imuSeqNum: controller.imuSeqNum));
-            //     },
-            //     child: const Text('GYRO'),
-            //   ),
-            //   const SizedBox(width: 5),
-            //   ElevatedButton(
-            //     onPressed: () async {
-            //       await Get.to(() => IMUChartScreen(
-            //           chartType: ChartType.euler,
-            //           valuesX: controller.yaw,
-            //           valuesY: controller.pitch,
-            //           valuesZ: controller.roll,
-            //           imuSeqNum: controller.imuSeqNum));
-            //     },
-            //     child: const Text('Euler'),
-            //   ),
-            // ]),
-            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
+                if (!BciDeviceManager.isBondOxyZen) return;
                 await OxyZenDfu.checkNewFirmware(force: true);
-                await Get.to(() => DeviceOtaScreen());
+                await Get.to(() => OxyZenOtaScreen());
               },
               child: const Text('Device OTA'),
             ),

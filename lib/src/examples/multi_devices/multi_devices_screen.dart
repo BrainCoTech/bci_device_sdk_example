@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:bci_device_sdk_example/logger.dart';
 import 'package:bci_device_sdk_example/main.dart';
 
-import '../scan/scan_result_widgets.dart';
+import '../scan/scan_result_tile.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/status_text_widget.dart';
 import 'multi_devices_controller.dart';
 
 class MultiDevicesScreen extends StatelessWidget {
@@ -15,55 +17,23 @@ class MultiDevicesScreen extends StatelessWidget {
       final manager = controller.manager.value;
       if (manager == null) {
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Find Multi Devices'),
-          ),
+          appBar: MyAppBar(title: 'Find Multi Devices'),
         );
       }
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Find Multi Devices'),
+          backgroundColor: Get.theme.colorScheme.inversePrimary,
+          leading: const MyBackButton(),
           actions: [
-            ElevatedButton(
+            TextButton(
               onPressed: manager.bindScanResults,
-              child: Text(
-                'bindAll',
-                style: Theme.of(context)
-                    .primaryTextTheme
-                    .labelLarge!
-                    .copyWith(color: Colors.white),
-              ),
+              child: Text('bindAll'),
             ),
-            ElevatedButton(
+            TextButton(
               onPressed: manager.clearAllDevices,
-              child: Text(
-                'disconnectAll',
-                style: Theme.of(context)
-                    .primaryTextTheme
-                    .labelLarge!
-                    .copyWith(color: Colors.white),
-              ),
+              child: Text('disconnectAll'),
             ),
           ],
-          // bottom: PreferredSize(
-          //   preferredSize: Size.fromHeight(80),
-          //   child: Column(
-          //     children: [
-          //       Row(
-          //         children: [
-          //           ElevatedButton(
-          //             onPressed: _startTrackAttention,
-          //             child: const Text('Track Attention'),
-          //           ),
-          //           ElevatedButton(
-          //             onPressed: _cancelTrackAttention,
-          //             child: const Text('Cancel Track Attention'),
-          //           ),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -102,8 +72,6 @@ class MultiDevicesScreen extends StatelessWidget {
                           .where(
                               (e) => !manager.deviceMap.containsKey(e.uniqueId))
                           .toList();
-                      // loggerApp.i(
-                      //     'scan result list.length=${list.length} result.length=${results.length}');
                       return IntrinsicHeight(
                         child: Column(
                           children: results.map((r) {
@@ -187,7 +155,7 @@ class DeviceTile extends StatelessWidget {
               stream: device.onStateChanged,
               builder: (context, snapshot) => StatusText(
                 title: 'State',
-                value: snapshot.data!.desc,
+                value: snapshot.data!.name,
               ),
             ),
             StreamBuilder<String>(

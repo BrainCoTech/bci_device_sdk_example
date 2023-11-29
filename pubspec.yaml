@@ -1,5 +1,5 @@
 name: bci_device_sdk_example
-version: 0.0.1+1
+version: 0.0.2+1
 description: Demonstrates how to use the bci_device_sdk plugin.
 
 # The following line prevents the package from being accidentally published to
@@ -15,19 +15,19 @@ dependencies:
     sdk: flutter
 
   libcmsn:
-    version: ^1.4.9
+    version: ^1.14.0
     hosted:
       name: libcmsn
       url: https://dart-pub.brainco.cn
 
   liboxyz:
-    version: ^0.11.9
+    version: ^1.13.1
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn
 
-  fl_chart: #">=0.62.0" #0.63.0
-  charts_flutter_new:
+  fl_chart: ">=0.62.0"
+  charts_flutter_new: ^0.12.0
   flutter_easyloading: ^3.0.5
   get: ^4.6.5
   flutter_switch: ^0.3.2
@@ -53,9 +53,9 @@ dependencies:
       name: flutter_utils
       url: https://dart-pub.brainco.cn
 
-  url_launcher:
-  file_picker:
-  provider:
+  url_launcher: ^6.1.12
+  file_picker: ^5.3.3
+  provider: ^6.0.5
   dropdown_button2: ^1.4.0
 
 dependency_overrides:

@@ -9,8 +9,9 @@ import 'package:bci_device_sdk_example/src/examples/charts/imu_chart.dart';
 import 'package:bci_device_sdk_example/src/examples/widgets/segment.dart';
 
 import '../oxyzen/oxyzen_device_controller.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/status_text_widget.dart';
 import 'crimson_device_controller.dart';
-import '../scan/scan_result_widgets.dart';
 
 class CrimsonDeviceScreen extends StatelessWidget {
   final controller = Get.put(CrimsonDeviceController());
@@ -21,32 +22,28 @@ class CrimsonDeviceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Get.theme.colorScheme.inversePrimary,
+          leading: const MyBackButton(),
           title: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Obx(() => Text(
-                  '${BciDeviceProxy.instance.name} V${controller.firmware.value}')),
+                  '${controller.deviceName.value} V${controller.firmware.value}')),
               const SizedBox(height: 3),
               Text(
                 BciDeviceProxy.instance.id,
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
+                style: TextStyle(fontSize: 14),
               )
             ],
           ),
           actions: [
-            ElevatedButton(
-                onPressed: () async {
-                  await BciDeviceManager.unbind();
-                  Get.back();
-                },
-                child: Text(
-                  '解除配对', //: 'Unpair',
-                  style: Theme.of(context)
-                      .primaryTextTheme
-                      .labelLarge!
-                      .copyWith(color: Colors.white),
-                ))
+            TextButton(
+              onPressed: () async {
+                await BciDeviceManager.unbind();
+                Get.back();
+              },
+              child: Text('解除配对'),
+            ),
           ]),
       body: CrimsonDataWidget(),
     );

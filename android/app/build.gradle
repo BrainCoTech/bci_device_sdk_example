@@ -29,19 +29,8 @@ android {
     namespace "tech.brainco.bci_device_sdk_example"
     compileSdk 34
 
-//    configurations.all {
-//        resolutionStrategy {
-//            eachDependency {
-//                if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
-//                    useVersion("1.8.22")
-//                }
-//            }
-//        }
-//    }
-
     defaultConfig {
         applicationId "tech.brainco.bci_device_sdk_example"
-//        minSdk 21, https://github.com/juliansteenbakker/mobile_scanner/issues/729
         minSdk 24
         targetSdk 34
         versionCode flutterVersionCode.toInteger()

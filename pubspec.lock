@@ -53,18 +53,26 @@ packages:
     dependency: transitive
     description:
       name: bci_device
-      sha256: "0c5b3c1fbc26d12a423d4fafaf287f8c357e3154249eb43f1d8aafbfe035f72d"
+      sha256: "6cfe86f4bef8dceacafc209757f3051955ee8c42582315e5593ccb96d225da18"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.10"
+  bci_device_nordic:
+    dependency: transitive
+    description:
+      name: bci_device_nordic
+      sha256: "567d2465ff49f63e895c017df47b92f80bd730209a29d355ba3958060e6d080f"
+      url: "https://dart-pub.brainco.cn"
+    source: hosted
+    version: "0.0.2+2"
   bci_device_sdk:
     dependency: transitive
     description:
       name: bci_device_sdk
-      sha256: ba36ec3f20e598659dc3e0ba38d76b71cb5a2545990b48672a88ee029e2232fc
+      sha256: "74f3eb1daa03cdef44e7174e86617bae4ee955a932c8aceb402b57df8dbbe56e"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.9"
+    version: "0.1.9"
   boolean_selector:
     dependency: transitive
     description:
@@ -274,10 +282,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_blue
-      sha256: "1ec4baa7b78246b559b189691631ef3686f6be4342caa9dbb6ee6399261feb7a"
+      sha256: c75f9ff8fc1c0ca601bfdad5869405bcc407b3abc883e73369dc15e04077082e
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.5.7"
+    version: "1.5.7+2"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -408,6 +416,54 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  geolocator:
+    dependency: transitive
+    description:
+      name: geolocator
+      sha256: e946395fc608842bb2f6c914807e9183f86f3cb787f6b8f832753e5251036f02
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "10.1.0"
+  geolocator_android:
+    dependency: transitive
+    description:
+      name: geolocator_android
+      sha256: "93906636752ea4d4e778afa981fdfe7409f545b3147046300df194330044d349"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.3.1"
+  geolocator_apple:
+    dependency: transitive
+    description:
+      name: geolocator_apple
+      sha256: ab90ae811c42ec2f6021e01eca71df00dee6ff1e69d2c2dafd4daeb0b793f73d
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.3.2"
+  geolocator_platform_interface:
+    dependency: transitive
+    description:
+      name: geolocator_platform_interface
+      sha256: b8cc1d3be0ca039a3f2174b0b026feab8af3610e220b8532e42cff8ec6658535
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.1.0"
+  geolocator_web:
+    dependency: transitive
+    description:
+      name: geolocator_web
+      sha256: "59083f7e0871b78299918d92bf930a14377f711d2d1156c558cd5ebae6c20d58"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.2.0"
+  geolocator_windows:
+    dependency: transitive
+    description:
+      name: geolocator_windows
+      sha256: a92fae29779d5c6dc60e8411302f5221ade464968fe80a36d330e80a71f087af
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.2"
   get:
     dependency: "direct main"
     description:
@@ -476,18 +532,18 @@ packages:
     dependency: "direct main"
     description:
       name: libcmsn
-      sha256: bac4844ca7f6849a4ef5111f0a5d07bf823d3dc30a9d738e01d3ec4d9ba530fc
+      sha256: "390472557bbd948666c3a351284bf0572abe5de254ecdfbf01269d39c7faa2ea"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.4.9"
+    version: "1.14.0"
   liboxyz:
     dependency: "direct main"
     description:
       name: liboxyz
-      sha256: "63ba3a5bf69aad5e76ad8ae26e798f9e17fe6637fc710f6fa1294426c599a599"
+      sha256: e73b2f78e6b582d8939c46bc58c62ef0b24548c80a107434193af789977bf0af
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.11.9"
+    version: "1.13.1"
   lints:
     dependency: transitive
     description:

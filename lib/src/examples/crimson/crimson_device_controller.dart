@@ -16,8 +16,9 @@ const int _imuMaxLen = imuXRange ~/ 2;
 
 class CrimsonDeviceController extends GetxController
     with StreamSubscriptionsMixin, DeviceValues {
-  final device = BciDeviceProxy.instance;
-  final firmware = BciDeviceProxy.instance.deviceInfo.firmwareRevision.obs;
+  final device = BciDeviceManager.bondDevice as CrimsonDevice;
+  final firmware = BciDeviceProxy.instance.deviceInfo.firmwareVersion.obs;
+  final deviceName = BciDeviceProxy.instance.name.obs;
 
   final eegSeqNum = RxnInt(null);
   final imuSeqNum = RxnInt(null);
@@ -49,9 +50,19 @@ class CrimsonDeviceController extends GetxController
 
     addListenerEEG();
     addListenerIMU();
-    if (BciDeviceManager.bondDevice is! CrimsonDevice) return;
-    disableOrientationCheck.value =
-        (BciDeviceManager.bondDevice as CrimsonDevice).disableOrientationCheck;
+    disableOrientationCheck.value = device.disableOrientationCheck;
+
+    BciDeviceProxy.instance.onDeviceConnected.where((e) => e).listen((_) async {
+      deviceName.value = BciDeviceProxy.instance.name;
+    }).subscribedBy(this);
+    BciDeviceProxy.instance.onDeviceEvent
+        .where((e) => e == BciDeviceEvent.rename)
+        .listen((_) async {
+      deviceName.value = BciDeviceProxy.instance.name;
+    }).subscribedBy(this);
+    BciDeviceProxy.instance.onDeviceFirmware.listen((firmware) async {
+      this.firmware.value = firmware;
+    }).subscribedBy(this);
   }
 
   @override
@@ -59,70 +70,36 @@ class CrimsonDeviceController extends GetxController
     _displayTimer?.cancel();
     _displayTimer = null;
     clearSubscriptions();
-    clearOtaSubscriptions();
+    _clearOtaSubscriptions();
   }
 
   void addListenerEEG() {
     clearSubscriptions();
-    subscriptions.add(device.onEEGData.listen((event) {
+    device.onEEGData.listen((event) {
       eegSeqNum.value = event.seqNum;
       _eegValues.addAll(event.eeg);
       if (_eegValues.length > eegXRange) {
         _eegValues.removeRange(0, _eegValues.length - eegXRange);
       }
       // loggerApp.i('eegSeqNum=${eegSeqNum.value}, len=${_eegValues.length}');
-      // loggerApp.i('eegSeqNum=${eegSeqNum.value}, ${_eegValues.first}');
       eegValues.value = _eegValues;
-    }));
+    }).subscribedBy(this);
 
-    // subscriptions.add(BciDeviceProxy.instance.onBrainWave.listen((stats) {
-    // loggerApp.i('-----------onBrainWave-----------');
-    // loggerApp.i('stats.alpha=${stats.alpha}');
-    // loggerApp.i('stats.theta=${stats.theta}');
-    // print('stats.delta=${stats.delta}');
-    // print('stats.lowBeta=${stats.lowBeta}');
-    // print('stats.highBeta=${stats.highBeta}');
-    // print('stats.gamma=${stats.gamma}');
-    // }));
-
-    // subscriptions.add(BciDeviceProxy.instance.onDrowsiness.listen((val) {
-    //   loggerApp.i(
-    //       '[${BciDeviceProxy.instance.name}] drowsiness=${val.toStringAsFixed(1)}');
-    // }));
-
-    // subscriptions.add(BciDeviceProxy.instance.onMeditation.listen((val) {
-    //   loggerApp.i(
-    //       '[${BciDeviceProxy.instance.name}] meditation=${val.toStringAsFixed(1)}');
-    // }));
-
-    subscriptions.add(device.onAttention.listen((e) {
-      loggerApp.i('onAttention, $e');
+    device.onAttention.listen((e) {
       attentionList.add(e);
-    }));
-    subscriptions.add(device.onMeditation.listen((e) {
-      loggerApp.i('onMeditation, $e');
+    }).subscribedBy(this);
+    device.onMeditation.listen((e) {
       calmnessList.add(e);
-    }));
-    // subscriptions.add(BciDeviceProxy.instance.onImuData.listen((imu) {
-    //   loggerApp.i(
-    //       '[${BciDeviceProxy.instance.name}] IMU, head:${imu.head}, body:${imu.body}');
-    // }));
+    }).subscribedBy(this);
   }
 
   void addListenerIMU() {
-    subscriptions.add(device.onImuData.listen((event) {
+    device.onImuData.listen((event) {
       imuSeqNum.value = event.seqNum;
       _imuModels.add(event);
       if (_imuModels.length > _imuMaxLen) {
         _imuModels.removeRange(0, _imuModels.length - _imuMaxLen);
       }
-      // loggerApp.i(
-      //     'imuSeqNum=${imuSeqNum.value}, _imuModels.length=${_imuModels.length}, '
-      //     'acc len=${_imuModels.map((e) => e.acc.x).expand((e) => e).length}, '
-      //     'gyro len=${_imuModels.map((e) => e.gyro.x).expand((e) => e).length}, ');
-      // 'euler len=${_imuModels.map((e) => e.eulerAngle.yaw).expand((e) => e).length}');
-      // imuModels.value = _imuModels;
-
       accX.value = _imuModels.map((e) => e.acc.x).expand((e) => e).toList();
       accY.value = _imuModels.map((e) => e.acc.y).expand((e) => e).toList();
       accZ.value = _imuModels.map((e) => e.acc.z).expand((e) => e).toList();
@@ -147,7 +124,7 @@ class CrimsonDeviceController extends GetxController
           .map((e) => e.eulerAngle!.roll)
           .expand((e) => e)
           .toList();
-    }));
+    }).subscribedBy(this);
   }
 
   void setOrientationCheck(disabled) {
@@ -158,7 +135,7 @@ class CrimsonDeviceController extends GetxController
   }
 
   bool _otaRunning = false;
-  List<StreamSubscription> _otaSubscriptions = [];
+  final List<StreamSubscription> _otaSubscriptions = [];
 
   Future startDFU() async {
     if (_otaRunning) return;
@@ -198,31 +175,33 @@ class CrimsonDeviceController extends GetxController
     }
   }
 
-  void clearOtaSubscriptions() {
-    for (var subscription in _otaSubscriptions) {
-      subscription.cancel();
-    }
-    _otaSubscriptions.clear();
-  }
-
   Future _startDfu(CrimsonDevice device, String zipFilePath) async {
-    clearOtaSubscriptions();
-
-    device.otaMsgController.listen((msg) {
+    _clearOtaSubscriptions();
+    device.dfuHandler.msgController.listen((e) {
+      final index = e[0] as int;
+      final total = e[1] as int;
+      final msg = e[2] as String;
+      loggerApp.i('DFU: $index/$total, $msg');
       dfuProgress.value = msg;
     }).addToList(_otaSubscriptions);
-
-    device.otaStatusController.listen((status) {
-      switch (status) {
-        case OtaStatus.success:
-        case OtaStatus.failed:
+    device.dfuStateStream.listen((state) {
+      switch (state) {
+        case OtaState.success:
+        case OtaState.failed:
           _otaRunning = false;
           break;
         default:
           break;
       }
     }).addToList(_otaSubscriptions);
-    device.startDfu(zipFilePath);
+    final ret = device.startDfu(zipFilePath);
+    if (!ret) _clearOtaSubscriptions();
   }
 
+  void _clearOtaSubscriptions() {
+    for (var subscription in _otaSubscriptions) {
+      subscription.cancel();
+    }
+    _otaSubscriptions.clear();
+  }
 }
