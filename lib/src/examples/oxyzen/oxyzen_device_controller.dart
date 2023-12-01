@@ -89,7 +89,7 @@ class OxyzenDeviceController extends GetxController
         .listen((_) async {
       deviceName.value = BciDeviceProxy.instance.name;
     }).subscribedBy(this);
-    BciDeviceProxy.instance.onDeviceAnyFirmware.listen((firmware) async {
+    BciDeviceProxy.instance.onDeviceFirmware.listen((firmware) async {
       this.firmware.value = firmware;
     }).subscribedBy(this);
 

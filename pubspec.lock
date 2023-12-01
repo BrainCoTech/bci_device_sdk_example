@@ -53,26 +53,26 @@ packages:
     dependency: transitive
     description:
       name: bci_device
-      sha256: "6cfe86f4bef8dceacafc209757f3051955ee8c42582315e5593ccb96d225da18"
+      sha256: "2af4db05cbd199c3c79f33a14f37f8712f6d21807ccfc26825626133478a0111"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.10"
+    version: "0.1.0"
   bci_device_nordic:
     dependency: transitive
     description:
       name: bci_device_nordic
-      sha256: "567d2465ff49f63e895c017df47b92f80bd730209a29d355ba3958060e6d080f"
+      sha256: "7d08fd9cad58530b9d569d6dd6916f517e0e545290695bb224e540e229a0019d"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.2+2"
+    version: "0.0.3"
   bci_device_sdk:
     dependency: transitive
     description:
       name: bci_device_sdk
-      sha256: "74f3eb1daa03cdef44e7174e86617bae4ee955a932c8aceb402b57df8dbbe56e"
+      sha256: cde184fba0a7fcb022321ef1a3997e09e92b904470e0d75aafe7aa08c53cc28f
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.1.9"
+    version: "0.2.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -532,18 +532,18 @@ packages:
     dependency: "direct main"
     description:
       name: libcmsn
-      sha256: "390472557bbd948666c3a351284bf0572abe5de254ecdfbf01269d39c7faa2ea"
+      sha256: dbb1b52ce0a977a93e08fa5261fea3e8d9e8b784854ea883b302bcd84ccae3e5
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.14.0"
+    version: "1.15.0"
   liboxyz:
     dependency: "direct main"
     description:
       name: liboxyz
-      sha256: e73b2f78e6b582d8939c46bc58c62ef0b24548c80a107434193af789977bf0af
+      sha256: c1b14a7a1f9fb2e2a38ee394c40ff2a0b46004904d7eecd048b626891532a336
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.13.1"
+    version: "1.15.0"
   lints:
     dependency: transitive
     description:

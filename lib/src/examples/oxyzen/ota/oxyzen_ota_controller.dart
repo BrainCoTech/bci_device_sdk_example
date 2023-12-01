@@ -124,10 +124,10 @@ class OxyZenOtaController extends GetxController with StreamSubscriptionsMixin {
       loggerApp.w('Device is disconnected');
       return;
     }
-    if (device.batteryLevel < OxyZenConfig.otaBatteryLevelThreshold) {
+    if (device.batteryLevel < OxyZenDfu.batteryLevelThreshold) {
       loggerApp.w('device is low battery, batteryLevel=${device.batteryLevel}');
       ToastManager.show(
-          '请将设备充电至${OxyZenConfig.otaBatteryLevelThreshold}%以上再开始升级');
+          '请将设备充电至${OxyZenDfu.batteryLevelThreshold}%以上再开始升级');
       return;
     }
     clearOtaSubscriptions();
