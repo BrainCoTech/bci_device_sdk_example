@@ -81,10 +81,8 @@ class PermissionUtil {
         if (!androidInfo.isPhysicalDevice) return true;
         if (androidInfo.version.sdkInt >= 31) {
           loggerApp.i('request bluetooth scan & connect permission');
-          await [
-            Permission.bluetoothScan,
-            Permission.bluetoothConnect
-          ].request();
+          await [Permission.bluetoothScan, Permission.bluetoothConnect]
+              .request();
         } else {
           // await [Permission.locationWhenInUse, Permission.bluetooth].request();
           await Permission.locationWhenInUse.request();

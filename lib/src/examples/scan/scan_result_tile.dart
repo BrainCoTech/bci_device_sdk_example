@@ -4,7 +4,6 @@ import 'package:bci_device_sdk_example/src/examples/oxyzen/oxyzen_device_screen.
 import 'package:flutter/material.dart';
 import 'package:bci_device_sdk/bci_device_sdk.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_utils/flutter_utils.dart';
 import 'package:get/get.dart';
 
 class ScanResultWidget extends StatelessWidget {
@@ -71,10 +70,7 @@ class ScanResultTile extends StatelessWidget {
         ),
         Text(
           result.device.deviceId.substring(result.device.deviceId.length - 10),
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(fontSize: 13.ratio),
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );

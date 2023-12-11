@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:libcmsn/libcmsn.dart';
@@ -38,12 +39,11 @@ class CrimsonDeviceScreen extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              onPressed: () async {
-                await BciDeviceManager.unbind();
-                Get.back();
-              },
-              child: Text('解除配对'),
-            ),
+                onPressed: () async {
+                  await BciDeviceManager.unbind();
+                  Get.back();
+                },
+                child: Text('解除配对')),
           ]),
       body: CrimsonDataWidget(),
     );
@@ -122,7 +122,7 @@ class _CrimsonDataWidgetState extends State<CrimsonDataWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SegmentWidget(
-                      segments: ['EEG', 'ACC', 'GYRO', '正念'].asMap(),
+                      segments: ['EEG', 'ACC', 'GYRO', '指数'].asMap(),
                       selectedIndex: controller.tabIndex),
                   const SizedBox(height: 10),
                   chartWidget(controller.tabIndex.value),
@@ -197,7 +197,7 @@ class _CrimsonDataWidgetState extends State<CrimsonDataWidget> {
             ]),
             const SizedBox(height: 20),
             Obx(() => Text(
-                '${BciDeviceProxy.instance.name}   固件版本：V${controller.firmware.value}')),
+                '${controller.deviceName.value}   固件版本：V${controller.firmware.value}')),
             ElevatedButton(
               onPressed: () async {
                 final result = await FilePicker.platform.pickFiles(

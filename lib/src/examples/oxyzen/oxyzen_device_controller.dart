@@ -81,6 +81,9 @@ class OxyzenDeviceController extends GetxController
 
   void addListenData() {
     clearSubscriptions();
+    BciDeviceManager.onDeviceUnbind.listen((_) async {
+      loggerApp.i('device unbind, go scan screen');
+    }).subscribedBy(this);
     BciDeviceProxy.instance.onDeviceConnected.where((e) => e).listen((_) async {
       deviceName.value = BciDeviceProxy.instance.name;
     }).subscribedBy(this);

@@ -27,6 +27,7 @@ class BleScanController extends GetxController with StreamSubscriptionsMixin {
       permission.value = e;
     }).subscribedBy(this);
 
+    // BleScanner.winScanningMode = WinScanningMode.passive; // for crimson win
     BleScanner.ignoreRssi = false;
     // BleScanner.resultExpiredMilliseconds = 3000;
     await BleScanner.instance.startScan();
