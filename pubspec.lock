@@ -53,26 +53,26 @@ packages:
     dependency: transitive
     description:
       name: bci_device
-      sha256: "2af4db05cbd199c3c79f33a14f37f8712f6d21807ccfc26825626133478a0111"
+      sha256: "204835fddcb674b0bc765963ce25c90c4858bfc93dbf3cb8066228b0e5ffcf2d"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.1+1"
   bci_device_nordic:
     dependency: transitive
     description:
       name: bci_device_nordic
-      sha256: e29e73d237d817f9ae9a5617f363107a3777f1477faac0e6c7f369a069582da2
+      sha256: "6c80756e44931a0964b7257f0af565f84b9dd7a1ef5acec9b10c4f2632cf5773"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.3+6"
+    version: "0.0.3+14"
   bci_device_sdk:
     dependency: transitive
     description:
       name: bci_device_sdk
-      sha256: f025d1129a2310bf5e0c6d494d428f5839311b2cb2dbd1d733eaf3b3ab65d532
+      sha256: "5731fd788173fdb813a040a4732275da2d6ccf24a21ae560ae8da90bfa82c207"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.2.2+4"
+    version: "0.2.7"
   boolean_selector:
     dependency: transitive
     description:
@@ -282,10 +282,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_blue
-      sha256: "80495a7fc241b91f364db7a98ee83981450726cafab5723402cf229bb3a17e09"
+      sha256: f7f2f742e2af1b06d61bd781ef70b201940411cb0b766cae85e500982e2f3c0d
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.6.0"
+    version: "1.6.7"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -532,18 +532,18 @@ packages:
     dependency: "direct main"
     description:
       name: libcmsn
-      sha256: ad1e09bfb87b24de009a48f7f53edaaae7bf9e572917756785fe549f994e2d80
+      sha256: "72d279de1b4a5d3c5a55df33cdca02111ee28dd687e22c7d313f56ddf0410a2f"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.15.6"
+    version: "1.16.5"
   liboxyz:
     dependency: "direct main"
     description:
       name: liboxyz
-      sha256: "7b41190e61d2e3cd9d8ccc3311acf9b0f08bcd03612a682a444afb4f605009a9"
+      sha256: a37854ef9238c8f43eb4af8d9a650dcb18e04ed79c5a3a101a8d591e5ca25143
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.15.6"
+    version: "1.17.1"
   lints:
     dependency: transitive
     description:

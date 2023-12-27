@@ -260,7 +260,6 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
               if (kDebugMode)
                 ElevatedButton(
                   onPressed: () async {
-                    // await device.rename('OZ-正念冥想-Yo1');
                     await device.rename('Oxyzen-Yongle');
                   },
                   child: const Text('Rename'),

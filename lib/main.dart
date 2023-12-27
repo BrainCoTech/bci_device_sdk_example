@@ -21,9 +21,11 @@ export 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  BciDevicePluginRegistry.register(CrimsonPluginRegistry());
-  BciDevicePluginRegistry.register(OxyZenPluginRegistry());
   await AppLogger.init(level: Level.INFO);
+  BciDevicePluginRegistry.init({
+    CrimsonPluginRegistry(),
+    OxyZenPluginRegistry(),
+  });
   BciDeviceConfig.setAvailableModes({
     BciDeviceDataMode.attention,
     BciDeviceDataMode.meditation,

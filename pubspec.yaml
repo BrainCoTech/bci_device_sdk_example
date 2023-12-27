@@ -15,13 +15,13 @@ dependencies:
     sdk: flutter
 
   libcmsn:
-    version: ^1.15.6
+    version: ^1.16.5
     hosted:
       name: libcmsn
       url: https://dart-pub.brainco.cn
 
   liboxyz:
-    version: ^1.15.6
+    version: ^1.17.1
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn
