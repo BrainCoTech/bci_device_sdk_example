@@ -92,7 +92,7 @@ class EEGChartWidget extends StatelessWidget {
               dotData: FlDotData(show: false),
             ),
           ]),
-      duration: const Duration(seconds: 0),
+      // duration: const Duration(seconds: 0),
     );
   }
 }

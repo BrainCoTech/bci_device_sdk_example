@@ -61,18 +61,18 @@ packages:
     dependency: transitive
     description:
       name: bci_device_nordic
-      sha256: "6c80756e44931a0964b7257f0af565f84b9dd7a1ef5acec9b10c4f2632cf5773"
+      sha256: "2a6d270bfcf24858c20db943fb689875f231197c4ce1691af3b13dffa36e8e8d"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.0.3+14"
+    version: "0.0.3+21"
   bci_device_sdk:
     dependency: transitive
     description:
       name: bci_device_sdk
-      sha256: "5731fd788173fdb813a040a4732275da2d6ccf24a21ae560ae8da90bfa82c207"
+      sha256: dac8ea91140c3992045a86f501dd245ab51e38e1f3c7e19eea8bee452ffb4ba9
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "0.2.7"
+    version: "0.2.11+1"
   boolean_selector:
     dependency: transitive
     description:
@@ -269,10 +269,10 @@ packages:
     dependency: "direct main"
     description:
       name: fl_chart
-      sha256: c1e26c7e48496be85104c16c040950b0436674cdf0737f3f6e95511b2529b592
+      sha256: "48a1b69be9544e2b03d9a8e843affd89e43f3194c9248776222efcb4206bb1ec"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.63.0"
+    version: "0.62.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -532,18 +532,18 @@ packages:
     dependency: "direct main"
     description:
       name: libcmsn
-      sha256: "72d279de1b4a5d3c5a55df33cdca02111ee28dd687e22c7d313f56ddf0410a2f"
+      sha256: f2e3dbddeeb78a9c170e06c51b0dda2c3fd1f4f2e73d6329f9afe0a14dc828b4
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.16.5"
+    version: "1.17.6"
   liboxyz:
     dependency: "direct main"
     description:
       name: liboxyz
-      sha256: a37854ef9238c8f43eb4af8d9a650dcb18e04ed79c5a3a101a8d591e5ca25143
+      sha256: "0c79ff7b7b7d955af1aa7592ddd8d27d1ae65d286a98418e554582cedadb80c7"
       url: "https://dart-pub.brainco.cn"
     source: hosted
-    version: "1.17.1"
+    version: "1.18.6"
   lints:
     dependency: transitive
     description:

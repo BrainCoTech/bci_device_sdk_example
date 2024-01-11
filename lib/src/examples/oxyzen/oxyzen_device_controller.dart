@@ -14,7 +14,7 @@ class ConfigController {
   static final filePath = ''.obs;
 }
 
-abstract class DeviceValues {
+mixin DeviceValues {
   final calmnessList = RxList<double>();
   final attentionList = RxList<double>();
 }

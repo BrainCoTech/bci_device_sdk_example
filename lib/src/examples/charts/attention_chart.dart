@@ -68,7 +68,7 @@ class MeditationChart extends StatelessWidget {
                     color: Colors.blue,
                     dotData: FlDotData(show: false)),
               ]),
-          duration: const Duration(seconds: 0),
+          // duration: const Duration(seconds: 0),
         ),
       ),
     );
