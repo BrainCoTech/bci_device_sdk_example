@@ -14,14 +14,16 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # comment this dependency if not use Crimson device
   libcmsn:
-    version: ^1.22.0
+    version: 1.22.2
     hosted:
       name: libcmsn
       url: https://dart-pub.brainco.cn
 
+  # comment this dependency if not use OxyZen device
   liboxyz:
-    version: ^1.20.0
+    version: 1.21.0
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn

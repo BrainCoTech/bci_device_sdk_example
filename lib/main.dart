@@ -23,8 +23,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppLogger.init(level: Level.INFO);
   BciDevicePluginRegistry.init({
-    CrimsonPluginRegistry(),
-    OxyZenPluginRegistry(),
+    CrimsonPluginRegistry(), // comment this if not use Crimson
+    OxyZenPluginRegistry(), // comment this if not use OxyZen
   });
   BciDeviceConfig.setAvailableModes({
     BciDeviceDataMode.meditation,

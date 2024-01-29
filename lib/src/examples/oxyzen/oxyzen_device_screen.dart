@@ -105,7 +105,7 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                     .map((e) => e.ppgContactState),
                 builder: (context, snapshot) => StatusText(
                   title: 'PpgContactState',
-                  value: snapshot.data!.toString(),
+                  value: snapshot.data!.name,
                   highlighted: snapshot.data!.index <
                       PpgContactState.onSomeSubject.index,
                 ),
@@ -132,33 +132,6 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
             const SizedBox(height: 5),
             Row(
               children: <Widget>[
-                StreamBuilder<String>(
-                  initialData: BciDeviceProxy.instance.attention.toString(),
-                  stream: BciDeviceProxy.instance.onAttention
-                      .map((value) => value.toStringAsFixed(1)),
-                  builder: (context, snapshot) => StatusText(
-                    title: 'Attention',
-                    value: snapshot.data!,
-                  ),
-                ),
-                StreamBuilder<String>(
-                  initialData: BciDeviceProxy.instance.attentionEOG.toString(),
-                  stream: BciDeviceProxy.instance.onAttentionEOG
-                      .map((value) => value.toStringAsFixed(1)),
-                  builder: (context, snapshot) => StatusText(
-                    title: 'Attention-EOG',
-                    value: snapshot.data!,
-                  ),
-                ),
-                StreamBuilder<String>(
-                  initialData: BciDeviceProxy.instance.eyeMovement.toString(),
-                  stream: BciDeviceProxy.instance.onEyeMovement
-                      .map((value) => value.toStringAsFixed(1)),
-                  builder: (context, snapshot) => StatusText(
-                    title: '眼动指数',
-                    value: snapshot.data!,
-                  ),
-                ),
                 StreamBuilder<String>(
                   initialData: BciDeviceProxy.instance.meditation.toString(),
                   stream: BciDeviceProxy.instance.onMeditation
@@ -195,14 +168,14 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                     value: snapshot.data!,
                   ),
                 ),
-                StreamBuilder<String>(
-                  initialData: BciDeviceProxy.instance.stress.toString(),
-                  stream: BciDeviceProxy.instance.onStress
-                      .map((value) => value.toStringAsFixed(1)),
-                  builder: (context, snapshot) => StatusText(
-                    title: '压力指数',
-                    value: snapshot.data!,
-                  ),
+                StreamBuilder<SleepStageData>(
+                  stream: BciDeviceProxy.instance.onSleepStage,
+                  builder: (context, snapshot) => snapshot.data == null
+                      ? Spacer()
+                      : StatusText(
+                          title: '睡眠分期',
+                          value: snapshot.data!.stage.name,
+                        ),
                 ),
               ],
             ),
