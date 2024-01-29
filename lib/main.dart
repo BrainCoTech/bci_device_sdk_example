@@ -27,14 +27,10 @@ void main() async {
     OxyZenPluginRegistry(),
   });
   BciDeviceConfig.setAvailableModes({
-    BciDeviceDataMode.attention,
     BciDeviceDataMode.meditation,
     BciDeviceDataMode.drowsiness,
-    BciDeviceDataMode.social,
-    BciDeviceDataMode.stress,
     BciDeviceDataMode.eeg,
     BciDeviceDataMode.ppg,
-    BciDeviceDataMode.imu,
   });
   loggerApp.i('------------------main, init------------------');
   loggerApp.i('-----cmsn version=${CrimsonFFI.sdkVersion}-----');

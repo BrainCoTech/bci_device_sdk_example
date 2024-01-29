@@ -305,25 +305,6 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
               const SizedBox(width: 5),
             ]),
             const SizedBox(height: 5),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              ElevatedButton(
-                onPressed: () async {
-                  BciDeviceConfig.setAvailableModes({
-                    BciDeviceDataMode.attention,
-                  });
-                },
-                child: const Text('attention'),
-              ),
-              const SizedBox(width: 5),
-              ElevatedButton(
-                onPressed: () async {
-                  BciDeviceConfig.setAvailableModes({
-                    BciDeviceDataMode.meditation,
-                  });
-                },
-                child: const Text('meditation'),
-              ),
-            ]),
             if (kDebugMode)
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 ElevatedButton(
