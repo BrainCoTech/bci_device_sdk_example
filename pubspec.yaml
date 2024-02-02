@@ -1,5 +1,5 @@
 name: bci_device_sdk_example
-version: 0.0.2+1
+version: 0.0.3+1
 description: Demonstrates how to use the bci_device_sdk plugin.
 
 # The following line prevents the package from being accidentally published to
@@ -16,14 +16,14 @@ dependencies:
 
   # comment this dependency if not use Crimson device
   libcmsn:
-    version: 1.22.2
+    version: 1.22.11
     hosted:
       name: libcmsn
       url: https://dart-pub.brainco.cn
 
   # comment this dependency if not use OxyZen device
   liboxyz:
-    version: 1.21.0
+    version: 1.22.2
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn

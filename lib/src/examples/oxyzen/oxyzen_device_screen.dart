@@ -29,7 +29,7 @@ class OxyZenDeviceScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Obx(() => Text(
-                  '${controller.deviceName.value} nRF_PPG:${controller.firmware.value}')),
+                  '${controller.deviceName.value}, Firmware: V${controller.firmware.value}')),
               const SizedBox(height: 3),
               Text(
                 BciDeviceProxy.instance.id,

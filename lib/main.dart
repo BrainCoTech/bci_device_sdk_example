@@ -22,15 +22,18 @@ export 'package:get/get.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppLogger.init(level: Level.INFO);
-  BciDevicePluginRegistry.init({
+  /// register device plugin
+  await BciDevicePluginRegistry.init({
     CrimsonPluginRegistry(), // comment this if not use Crimson
     OxyZenPluginRegistry(), // comment this if not use OxyZen
   });
+  /// register data mode
   BciDeviceConfig.setAvailableModes({
-    BciDeviceDataMode.meditation,
-    BciDeviceDataMode.drowsiness,
-    BciDeviceDataMode.eeg,
-    BciDeviceDataMode.ppg,
+    BciDeviceDataMode.attention, // comment this if not use
+    BciDeviceDataMode.meditation, // comment this if not use
+    BciDeviceDataMode.drowsiness, // comment this if not use
+    BciDeviceDataMode.eeg, // comment this if not use
+    BciDeviceDataMode.ppg, // comment this if not use
   });
   loggerApp.i('------------------main, init------------------');
   loggerApp.i('-----cmsn version=${CrimsonFFI.sdkVersion}-----');

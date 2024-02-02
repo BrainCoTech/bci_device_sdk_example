@@ -29,7 +29,7 @@ class OxyZenOtaController extends GetxController with StreamSubscriptionsMixin {
       otaState.value == OtaState.uploading ||
       otaState.value == OtaState.applying;
 
-  bool get inOtaPpg => device.dfuHandler.inDfuCustomed; // in OTA PPG
+  bool get inOtaPpg => device.dfuHandler.inDfuCustomized; // in OTA PPG
   bool get inOtaNrf => device.dfuHandler.inDfuNordic; // in OTA Nordic
 
   bool get _btnEnabled =>

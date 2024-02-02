@@ -36,7 +36,7 @@ class ScanResultWidget extends StatelessWidget {
       onTap: () async {
         try {
           await EasyLoading.show(status: '配对中...');
-          await BciDeviceManager.bindBleScanResult(result);
+          await BleDeviceManager.bindScanResult(result);
           await EasyLoading.showSuccess('配对成功!');
           await Get.off(() =>
               result.isOxyZen ? OxyZenDeviceScreen() : CrimsonDeviceScreen());
