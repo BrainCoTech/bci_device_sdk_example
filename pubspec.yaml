@@ -23,7 +23,7 @@ dependencies:
 
   # comment this dependency if not use OxyZen device
   liboxyz:
-    version: 1.22.2
+    version: 1.22.3
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn

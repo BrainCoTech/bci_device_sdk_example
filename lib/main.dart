@@ -31,6 +31,7 @@ void main() async {
   BciDeviceConfig.setAvailableModes({
     BciDeviceDataMode.attention, // comment this if not use
     BciDeviceDataMode.meditation, // comment this if not use
+    BciDeviceDataMode.social, // comment this if not use
     BciDeviceDataMode.drowsiness, // comment this if not use
     BciDeviceDataMode.eeg, // comment this if not use
     BciDeviceDataMode.ppg, // comment this if not use
