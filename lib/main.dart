@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-// import 'package:flutter_utils/flutter_utils.dart' as utils;
+import 'package:flutter_utils/flutter_utils.dart' as utils;
 import 'package:get/get.dart';
 import 'package:libcmsn/libcmsn.dart';
 import 'package:liboxyz/liboxyz.dart';
@@ -42,7 +42,7 @@ void main() async {
   await BciDeviceManager.init();
 
   loggerApp.i('------------------main, runApp--------------');
-  // utils.Devices.init();
+  utils.Devices.init();
   runApp(const MyApp());
   configLoading();
 }

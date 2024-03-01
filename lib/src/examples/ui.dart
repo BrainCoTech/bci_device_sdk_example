@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-// import 'package:flutter_utils/flutter_utils.dart';
+import 'package:flutter_utils/flutter_utils.dart';
 import 'package:bci_device_sdk_example/logger.dart';
 import 'package:bci_device_sdk_example/main.dart';
 import 'package:bci_device_sdk_example/src/examples/constants/constant.dart';
@@ -9,8 +9,7 @@ import 'package:bci_device_sdk_example/src/examples/constants/constant.dart';
 /// 默认1倍
 extension SizeRatio on num {
   double get scale {
-    return 1;
-    // return ratio * ScreenUtil.designScale;
+    return ratio * ScreenUtil.designScale;
   }
 }
 
@@ -27,8 +26,8 @@ class ScreenUtil {
     if (designScale != null) ScreenUtil.designScale = designScale;
     if (designWidth != null) ScreenUtil.designWidth = designWidth;
     if (designHeight != null) ScreenUtil.designHeight = designHeight;
-    // Devices.init(
-    //     width: ScreenUtil.designWidth, height: ScreenUtil.designHeight);
+    Devices.init(
+        width: ScreenUtil.designWidth, height: ScreenUtil.designHeight);
     loggerApp.i(
         'designScale=${ScreenUtil.designScale}, designWidth=${ScreenUtil.designWidth}, designHeight=${ScreenUtil.designHeight}');
 

@@ -1,6 +1,5 @@
 import 'package:bci_device_sdk_example/src/examples/ui.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_utils/flutter_utils.dart';
 import 'package:get/get.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {

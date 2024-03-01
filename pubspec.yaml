@@ -49,11 +49,11 @@ dependencies:
       name: aliyun_oss
       url: https://dart-pub.brainco.cn
 
-#  flutter_utils:
-#    version: ^2.0.1
-#    hosted:
-#      name: flutter_utils
-#      url: https://dart-pub.brainco.cn
+  flutter_utils:
+    version: ^2.1.3
+    hosted:
+      name: flutter_utils
+      url: https://dart-pub.brainco.cn
 
   url_launcher: ^6.1.12
   file_picker: ^5.3.3
