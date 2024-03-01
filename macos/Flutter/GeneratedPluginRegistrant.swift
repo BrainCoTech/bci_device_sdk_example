@@ -13,7 +13,6 @@ import flutter_secure_storage_macos
 import geolocator_apple
 import libcmsn
 import liboxyz
-import package_info
 import package_info_plus
 import path_provider_foundation
 import shared_preferences_foundation
@@ -30,7 +29,6 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
   CrimsonPlugin.register(with: registry.registrar(forPlugin: "CrimsonPlugin"))
   OxyZenPlugin.register(with: registry.registrar(forPlugin: "OxyZenPlugin"))
-  FLTPackageInfoPlugin.register(with: registry.registrar(forPlugin: "FLTPackageInfoPlugin"))
   FLTPackageInfoPlusPlugin.register(with: registry.registrar(forPlugin: "FLTPackageInfoPlusPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))

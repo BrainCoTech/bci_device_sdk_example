@@ -1,5 +1,6 @@
+import 'package:bci_device_sdk_example/src/examples/ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_utils/flutter_utils.dart';
+// import 'package:flutter_utils/flutter_utils.dart';
 import 'package:get/get.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -60,7 +61,7 @@ class MyBackButton extends StatelessWidget {
         padding: const EdgeInsets.only(left: 2.0),
         child: IconButton(
           onPressed: onPressed ?? Get.back,
-          iconSize: 24.ratio,
+          iconSize: 24.scale,
           icon: Icon(
             Icons.chevron_left,
             // Icons.arrow_back_ios,
