@@ -146,7 +146,7 @@ class OxyZenOtaController extends GetxController with StreamSubscriptionsMixin {
       final index = e[0] as int;
       final total = e[1] as int;
       final state = e[2] as OtaState;
-      loggerApp.i('DFU: $index/$total, state=${state.desc}');
+      loggerApp.i('DFU: $index/$total, state=${state.name}');
       switch (state) {
         case OtaState.success:
         case OtaState.failed:

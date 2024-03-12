@@ -43,7 +43,7 @@ class _BluetoothOffScreen extends StatelessWidget {
             Text(
               permission.isOn
                   ? 'BLE permission is on'
-                  : '${permission.desc} not available',
+                  : '${permission.name} not available',
               style: Theme.of(context)
                   .primaryTextTheme
                   .titleMedium!
