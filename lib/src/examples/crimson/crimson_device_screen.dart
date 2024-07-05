@@ -172,6 +172,15 @@ class _CrimsonDataWidgetState extends State<CrimsonDataWidget> {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               ElevatedButton(
                 onPressed: () async {
+                  final device = BciDeviceManager.bondDevice;
+                  if (device is! CrimsonDevice) return;
+                  await device.setLedColor(0xffff00);
+                },
+                child: const Text('SetLEDColor'),
+              ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed: () async {
                   await Get.to(() => IMUChartScreen(
                       chartType: ChartType.gyro,
                       valuesX: controller.gyroX,

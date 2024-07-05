@@ -16,14 +16,14 @@ dependencies:
 
   # comment this dependency if not use Crimson device
   libcmsn:
-    version: 1.22.19
+    version: 1.23.1
     hosted:
       name: libcmsn
       url: https://dart-pub.brainco.cn
 
   # comment this dependency if not use OxyZen device
   liboxyz:
-    version: 1.22.11
+    version: 1.22.19
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn
@@ -74,5 +74,5 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/
+#  assets:
+#    - assets/images/

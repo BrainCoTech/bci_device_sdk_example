@@ -196,24 +196,6 @@ class _OxyzenDataWidgetState extends State<OxyzenDataWidget> {
                 ],
               ),
             ),
-            /*
-            if (kDebugMode)
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    controller.analyzeEEG();
-                  },
-                  child: const Text('Analyze EEG'),
-                ),
-                const SizedBox(width: 5),
-                ElevatedButton(
-                  onPressed: () async {
-                    controller.pauseAnalyzeEEG();
-                  },
-                  child: const Text('Pause Analyze EEG'),
-                ),
-              ]),
-             */
             const SizedBox(height: 5),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               ElevatedButton(
