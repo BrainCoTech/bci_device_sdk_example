@@ -104,6 +104,7 @@ class HomeScreen extends StatelessWidget {
         back: false,
         rxTitle: controller.buildInfo,
       ),
+      // ignore: deprecated_member_use
       body: WillPopScope(
         onWillPop: _onWillPop,
         child: Padding(
