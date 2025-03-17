@@ -13,7 +13,7 @@ class MeditationChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DeviceValues controller = (BciDeviceProxy.instance.isOxyzen
+    final DeviceValues controller = (BciDeviceProxy.instance.isOxyZen
         ? Get.find<OxyzenDeviceController>()
         : Get.find<CrimsonDeviceController>()) as DeviceValues;
     return Container(

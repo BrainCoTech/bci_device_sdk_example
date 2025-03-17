@@ -203,7 +203,8 @@ class OxyzenDeviceController extends GetxController
             'https://app.brainco.cn/crimson-firmware/updates/DFU_zenlite_V2.2.0.zip';
         loggerApp.i('download url=$url');
         dfuProgress.value = '';
-        final file = await FileCacheManager.getSingleFile(url);
+        final file = await OtaFileCacheManager()
+            .getSingleFileWithSuffix(url, suffix: '.zip');
         await _startDfu(device, file.path);
       }
     } catch (e) {

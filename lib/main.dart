@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
   void _pushBondHeadbandScreen() {
     final headband = BciDeviceManager.bondDevice;
     if (headband == null) return;
-    if (headband.isOxyzen) {
+    if (headband.isOxyZen) {
       Get.to(() => OxyZenDeviceScreen());
     } else if (headband.isCrimson || headband.isBstar) {
       Get.to(() => CrimsonDeviceScreen());

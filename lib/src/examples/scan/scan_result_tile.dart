@@ -39,7 +39,7 @@ class ScanResultWidget extends StatelessWidget {
           await BleDeviceManager.bindScanResult(result);
           await EasyLoading.showSuccess('配对成功!');
           await Get.off(() =>
-              result.isOxyZen ? OxyZenDeviceScreen() : CrimsonDeviceScreen());
+              result.deviceType.isOxyZen ? OxyZenDeviceScreen() : CrimsonDeviceScreen());
         } catch (e, st) {
           loggerApp.i('$e');
           debugPrintStack(stackTrace: st, maxFrames: 7);
