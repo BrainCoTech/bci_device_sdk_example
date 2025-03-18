@@ -16,14 +16,14 @@ dependencies:
 
   # comment this dependency if not use Crimson device
   libcmsn:
-    version: 2.4.1
+    version: 2.5.0
     hosted:
       name: libcmsn
       url: https://dart-pub.brainco.cn
 
   # comment this dependency if not use OxyZen device
   liboxyz:
-    version: 1.26.0
+    version: 1.26.2
     hosted:
       name: liboxyz
       url: https://dart-pub.brainco.cn
